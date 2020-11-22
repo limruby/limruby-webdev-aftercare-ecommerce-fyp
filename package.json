@@ -4,8 +4,10 @@
   "description": "An ecommmerce website with multivendor function",
   "main": "main.js",
   "scripts": {
-    "serve:local": "nodemon index.js", 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve:local": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./*.js",
+    "lint:fix": "eslint --fix ./*.js"
   },
   "keywords": [
     "ecommerce"
@@ -16,6 +18,11 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
     "nodemon": "^2.0.6"
   }
 }
