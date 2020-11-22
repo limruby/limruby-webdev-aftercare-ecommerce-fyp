@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <title>SmartCare | ECommerce</title>
+        <link rel="stylesheet" href="style.css">
+        <!--GOOGLE FONTS-->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <!-- FONT AWESOME BOOTSTRAP CDN-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+     <!---BACKGROUND CONTAINER-->
+     <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">  <img src="images/logo.png" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </nav>
+           <img src="images/cart_icon.png" width="30px" height="30px">
+           <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+    <!---------------------TITLE------------------->
+<div class="small-container">
+    <div class="row">
+        <h2 class="title">About Us</h2>
+    </div>
+   <!-------------About Us SlideShow---------------->
+   <div class="slideshow-container">
+       <div class="small-container">
+           <div class="row">
+            <div class="mySlides">
+                <div class="numbertext">1 / 8</div>
+                <img src="images/Slide1.png" style="width:100% " >
+              </div>
+              
+              <div class="mySlides">
+                <div class="numbertext">2 / 8</div>
+                <img src="images/Slide2.png" style="width:100%">
+              </div>
+              
+              <div class="mySlides">
+                <div class="numbertext">3 / 8</div>
+                <img src="images/Slide3.png" style="width:100%" >
+              </div>
+              <div class="mySlides">
+                <div class="numbertext">4 / 8</div>
+                <img src="images/Slide4.png" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <div class="numbertext">5 / 8</div>
+                <img src="images/Slide6.png" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <div class="numbertext">6 / 8</div>
+                <img src="images/Slide7.png" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <div class="numbertext">7 / 8</div>
+                <img src="images/Slide8.png" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <div class="numbertext">8 / 8</div>
+                <img src="images/Slide9.png" style="width:100%">
+              </div>
+              
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              
+              </div>
+              <br>
+              
+              <div style="text-align: center;">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span> 
+                 <span class="dot" onclick="currentSlide(7)"></span> 
+                  <span class="dot" onclick="currentSlide(8)"></span> 
+              </div>
+              
+           </div>
+       </div>
+   </div>
+
+
+    <!-------------Content---------------->
+   <div class="row">
+       <h4>Problem Statement</h4>
+   </div>
+
+</div>
+
+<!-------------FOOTER---------------->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Subsribe our service</h3>
+                <p>Explore our platform</p>
+            </div>
+            <div class="footer-col-2">
+                <img src="images/logo.png">
+                <p>Explore our platform</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Community</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyright 2020 - Easy Tutorials</p>
+    </div>
+</div>
+<!---------JS FOR TOGGLE MENU ------->
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "200px"
+        }else{
+            MenuItems.style.maxHeight = "0px"
+        }
+    }
+</script>
+<!-- JS FOR SLIDESHOW -->
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/jquery.backtotop.js"></script>
+<script src="scripts/jquery.mobilemenu.js"></script>
+<script>
+"use strict";
+var slideIndex = 1;
+var i;
+var x = document.getElementsByClassName("mySlides");
+var dots = document.getElementsByClassName("dot");
+carousel();
+
+function carousel() {
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";
+		dots[i].className = dots[i].className.replace("active", "");
+	}
+	slideIndex++;
+	if (slideIndex > x.length) {
+		slideIndex = 1;
+	}
+	x[slideIndex - 1].style.display = "block";
+	dots[slideIndex - 1].className += " active";
+	setTimeout(carousel, 3000); // Change image every 2 seconds
+}
+
+function currentDiv(n) {
+	showDivs(slideIndex = n);
+}
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+</script>
+
+    </body>
+
+</html>
