@@ -1,6 +1,3 @@
-/**
- * Send errors to front-end
- */
 const joiErrorFormatter = (rawErrors) => {
   const errors = {}
   const details = rawErrors.details
@@ -18,4 +15,5 @@ const mongooseErrorFormatter = (rawErrors) => {
   }
   return errors
 }
+
 module.exports = { joiErrorFormatter, mongooseErrorFormatter }

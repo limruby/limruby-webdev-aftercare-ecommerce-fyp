@@ -1,6 +1,3 @@
-/**
- * Import servers to serve pages, only able to call function and show error, all functions in /modules
- */
 const express = require('express')
 const router = express.Router()
 const { addUser } = require('../modules/users/service/userService')
@@ -11,8 +8,9 @@ const { joiErrorFormatter, mongooseErrorFormatter } = require('../utils/validati
  * Shows page for user registration
  */
 router.get('/register', (req, res) => {
-  return res.render('register', { message: null })
+  return res.render('register', { message: {}, formData: {}, errors: {} })
 })
+
 /**
  * Handles user registration
  */
@@ -22,15 +20,34 @@ router.post('/register', async (req, res) => {
       abortEarly: false
     })
     if (validationResult.error) {
-      // return res.send(joiErrorFormatter(validationResult.error))
-      return res.render('register', { message: 'Validation errors' })
+      return res.render('register', {
+        message: {
+          type: 'error',
+          body: 'Validation Errors'
+        },
+        errors: joiErrorFormatter(validationResult.error),
+        formData: req.body
+      })
     }
     const user = await addUser(req.body)
-    return res.render('register', { message: 'Registration successful' })
+    return res.render('register', {
+      message: {
+        type: 'success',
+        body: 'Registration success'
+      },
+      errors: {},
+      formData: req.body
+    })
   } catch (e) {
     console.error(e)
-    return res.send(mongooseErrorFormatter(e))
-    return res.status(400).render('register', { message: 'Something went wrong' })
+    return res.status(400).render('register', {
+      message: {
+        type: 'error',
+        body: 'Validation Errors'
+      },
+      errors: mongooseErrorFormatter(e),
+      formData: req.body
+    })
   }
 })
 
