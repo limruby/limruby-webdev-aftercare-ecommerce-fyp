@@ -1,9 +1,10 @@
 /**
- * Import servers to serve pages
+ * Import servers to serve pages, only able to call function and show error, all functions in /modules
  */
 const express = require('express')
 const router = express.Router()
 const { addUser } = require('../modules/users/service/userService')
+const { registerSchema } = require('../modules/users/validations/authValidation')
 
 /**
  * Shows page for user registration
@@ -16,6 +17,12 @@ router.get('/register', (req, res) => {
  */
 router.post('/register', async (req, res) => {
   try {
+    const validationResult = registerSchema.validate(req.body, {
+      abortEarly: false
+    })
+    if (validationResult.error) {
+      return res.render('register', { message: 'Validation errors' })
+    }
     const user = await addUser(req.body)
     return res.render('register', { message: 'Registration successful' })
   } catch (e) {
