@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="en">
 <%- include('includes/head')%>
+
 <body>
   <%- include('includes/nav')%>
   <div class="container mt-5">
     <h1>Registration</h1>
     <% if (message) { %>
-      <div class="alert alert-success" role="alert">
-        <%= message %>
-      </div>
+    <div class="alert alert-success" role="alert">
+      <%= message %>
+    </div>
     <% } %>
     <form method="POST" action="/register">
       <div class="form-group">
@@ -31,7 +32,7 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-  
 </body>
 <%- include('includes/footer')%>
+
 </html>

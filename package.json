@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "serve:local": "nodemon index.js",
-    "test": "mocha testing/*.js --exit",
+    "test": "mocha tests/*.js --exit",
     "lint": "eslint ./*.js",
     "lint:fix": "eslint --fix ./*.js"
   },
