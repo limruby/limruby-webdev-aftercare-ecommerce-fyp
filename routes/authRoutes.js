@@ -3,15 +3,8 @@ const router = express.Router()
 const { addUser } = require('../modules/users/service/userService')
 const { registerSchema } = require('../modules/users/validations/authValidation')
 const { joiErrorFormatter, mongooseErrorFormatter } = require('../utils/validationFormatter')
+const passport = require('passport')
 
-const m1 = (req, res, next) => {
-  req.user = 'Guest'
-  next()
-}
-const m2 = (req, res, next) => {
-  console.log(req.url)
-  next()
-}
 /**
  * Shows page for user registration
  */
@@ -68,8 +61,12 @@ router.get('/login', (req, res) => {
 /**
  * User log in
  */
-router.post('/login', m1, m2, (req, res) => {
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/login-success',
+  failureRedirect: '/login-failed'
+}), (req, res) => {
   console.log(req.user)
+
   return res.render('login', {
     message: {
       type: 'success',

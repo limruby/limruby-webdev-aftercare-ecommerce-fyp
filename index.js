@@ -2,6 +2,8 @@ const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 require('./utils/db.config')
+const passport = require('passport')
+require('./utils/authStrategies/localStrategy')
 
 const authRoutes = require('./routes/authRoutes')
 const app = express()
@@ -17,6 +19,8 @@ app.use(session({
   // false because we use localhost, set true for HTTPS and certificate installation in browser
   cookie: { secure: false }
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', authRoutes)
 // using app.use to serve up static CSS files in public/assets/ folder when /public link is called in ejs files
@@ -25,7 +29,7 @@ app.use('/public', express.static('public'))
 
 app.get('/', (req, res) => {
   req.session.views = (req.session.views || 0) + 1
-  console.log(`You have visited ${req.session.views} times`)
+  console.log('User:', req.user)
   return res.render('index')
 })
 
