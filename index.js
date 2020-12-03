@@ -24,6 +24,9 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.locals.message = {}
+app.locals.formData = {}
+app.locals.errors = {}
 
 app.use('/', authRoutes)
 // using app.use to serve up static CSS files in public/assets/ folder when /public link is called in ejs files
