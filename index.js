@@ -9,6 +9,7 @@ require('./utils/authStrategies/localStrategy')
 const authMiddleware = require('./middlewares/authMiddleware')
 const authRoutes = require('./routes/authRoutes')
 const app = express()
+const logger = require('morgan')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')
@@ -22,6 +23,7 @@ app.use(session({
   cookie: { secure: false },
   store: new MongoStore({ mongooseConnection: mongoDBConnection })
 }))
+app.use(logger('dev'))
 app.use(passport.initialize())
 app.use(passport.session())
 app.locals.message = {}
