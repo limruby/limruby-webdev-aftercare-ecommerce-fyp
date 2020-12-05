@@ -15,7 +15,7 @@ const app = express()
 const config = require('./utils/config')
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.set('view engine', 'ejs')
+app.set('view engine', 'pug')
 // app.set('trust proxy', 1) // trust first proxy
 app.use(session({
 // encrypting session data, secret generated randomly from node crypto
@@ -26,19 +26,30 @@ app.use(session({
   cookie: { secure: false },
   store: new MongoStore({ mongooseConnection: mongoDBConnection })
 }))
-// app.use(express.static('public'))
-
+app.use(express.static('public'))
 app.use(logger('dev'))
 app.use(passport.initialize())
 app.use(passport.session())
-app.locals.message = {}
-app.locals.formData = {}
-app.locals.errors = {}
+
+/**
+ * Global middleware to make logged in user available to the views
+ */
+app.use((req, res, next) => {
+  res.locals.users = req.isAuthenticated() ? req.user : null
+  next()
+})
+
+/**
+ * App level locals
+ */
+app.locals.message = {} // Used in displaying alert
+app.locals.formData = {} // For prefilling data on form validation
+app.locals.errors = {} // Form validation errors
 
 app.use('/', authRoutes)
 // using app.use to serve up static CSS files in public/assets/ folder when /public link is called in ejs files
 // app.use("/route", express.static("foldername"));
-app.use('/public', express.static('public'))
+// app.use('/public', express.static('public'))
 
 app.get('/', flasherMiddleware, (req, res) => {
   console.log(req.method)
@@ -46,7 +57,7 @@ app.get('/', flasherMiddleware, (req, res) => {
 })
 
 app.get('/homepage', authMiddleware, (req, res) => {
-  return res.send(`welcome ${req.user.name}`)
+  return res.render('dashboard')
 })
 
 app.use((req, res, next) => {
