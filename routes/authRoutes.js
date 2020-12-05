@@ -82,7 +82,7 @@ router.post('/login', guestMiddleware, (req, res, next) => {
       req.session.flashData = {
         message: {
           type: 'error',
-          body: info.error
+          body: info.message
         }
       }
       return res.redirect('/login')
