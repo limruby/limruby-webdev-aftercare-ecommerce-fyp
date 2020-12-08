@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 /**
  * App level locals
  */
+app.locals.title = 'SmartCare'
 app.locals.message = {} // Used in displaying alert
 app.locals.formData = {} // For prefilling data on form validation
 app.locals.errors = {} // Form validation errors
@@ -49,7 +50,7 @@ app.locals.errors = {} // Form validation errors
 app.use('/', authRoutes)
 // using app.use to serve up static CSS files in public/assets/ folder when /public link is called in ejs files
 // app.use("/route", express.static("foldername"));
-// app.use('/public', express.static('public'))
+app.use('/public', express.static('public'))
 
 app.get('/', flasherMiddleware, (req, res) => {
   return res.render('index')
